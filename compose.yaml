@@ -1,19 +1,50 @@
 volumes:
   ledger:
+  accounts:
 
 services:
   solana-cli:
     build:
       context: ./solana-cli
+
   plugin:
     build:
       context: ./geyser-plugin
+
   test-validator:
-    container_name: lattice-hash-test-test-validator
     build:
       context: ./solana-test-validator
       additional_contexts:
         solana-cli: service:solana-cli
         plugin: service:plugin
+    depends_on:
+      - plugin
     volumes:
       - ledger:/ledger
+    environment:
+      - RPC_PORT=8899
+
+  # validator:
+  #   build:
+  #     context: ./validator
+  #     additional_contexts:
+  #       solana-cli: service:solana-cli
+  #       plugin: service:plugin
+  #   depends_on:
+  #     - plugin
+  #   # volumes:
+  #   #   - ledger:/ledger
+  #   #   - accounts:/accounts
+  #   environment:
+  #     - RPC_PORT=8899
+
+  traffic-script:
+    build:
+      context: ./traffic-script
+      additional_contexts:
+        solana-cli: service:solana-cli
+    depends_on:
+      # test-validator:
+      #   condition: service_healthy
+      validator:
+        condition: service_healthy
