@@ -1,0 +1,19 @@
+volumes:
+  ledger:
+
+services:
+  solana-cli:
+    build:
+      context: ./solana-cli
+  plugin:
+    build:
+      context: ./geyser-plugin
+  test-validator:
+    container_name: lattice-hash-test-test-validator
+    build:
+      context: ./solana-test-validator
+      additional_contexts:
+        solana-cli: service:solana-cli
+        plugin: service:plugin
+    volumes:
+      - ledger:/ledger
