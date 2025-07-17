@@ -5,7 +5,7 @@ set -ex
 # The purpose of this script is to generate a high volume of account creations, transfers, and closing
 # account events for the purpose of testing the account indexing service.
 
-export SOLANA_URL=http://test-validator:8899
+export SOLANA_URL=http://test-validator:$RPC_PORT
 export ACCOUNT_WITH_SOLANA_FILE=$(pwd)/account-with-solana.json
 export MAIN_WALLET=$ACCOUNT_WITH_SOLANA_FILE
 

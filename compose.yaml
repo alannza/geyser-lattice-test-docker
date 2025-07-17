@@ -31,3 +31,5 @@ services:
     depends_on:
       test-validator:
         condition: service_healthy
+    environment:
+      - RPC_PORT=8899
