@@ -1,5 +1,5 @@
 
-FROM rust:1.88 AS base
+FROM rust:1.84.1 AS base
 # # https://github.com/helius-labs/geyser-lattice-test.git
 ENV HASH=9c74f3fee547edcebd70d7daf6770822ed890a02
 ENV ZIP=https://github.com/helius-labs/geyser-lattice-test/archive/$HASH.zip

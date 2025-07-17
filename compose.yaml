@@ -1,7 +1,3 @@
-volumes:
-  ledger:
-  accounts:
-
 services:
   solana-cli:
     build:
@@ -19,24 +15,8 @@ services:
         plugin: service:plugin
     depends_on:
       - plugin
-    volumes:
-      - ledger:/ledger
     environment:
       - RPC_PORT=8899
-
-  # validator:
-  #   build:
-  #     context: ./validator
-  #     additional_contexts:
-  #       solana-cli: service:solana-cli
-  #       plugin: service:plugin
-  #   depends_on:
-  #     - plugin
-  #   # volumes:
-  #   #   - ledger:/ledger
-  #   #   - accounts:/accounts
-  #   environment:
-  #     - RPC_PORT=8899
 
   traffic-script:
     build:
@@ -44,7 +24,5 @@ services:
       additional_contexts:
         solana-cli: service:solana-cli
     depends_on:
-      # test-validator:
-      #   condition: service_healthy
-      validator:
+      test-validator:
         condition: service_healthy
