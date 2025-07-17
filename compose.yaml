@@ -6,6 +6,11 @@ services:
   plugin:
     build:
       context: ./geyser-plugin
+      args:
+        # https://github.com/helius-labs/geyser-lattice-test.git
+        ZIP: https://github.com/helius-labs/geyser-lattice-test/archive/9c74f3fee547edcebd70d7daf6770822ed890a02.zip
+        SRCDIR: /geyser-lattice-test-9c74f3fee547edcebd70d7daf6770822ed890a02
+        LIB: libgeyser_lattice_test.so
 
   test-validator:
     build:
